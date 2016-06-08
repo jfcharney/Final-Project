@@ -1,0 +1,63 @@
+<!-- Validation failure messages -->
+<% if @fund.errors.any? %>
+  <% @fund.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Fund</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_fund" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for fund_family -->
+      <div class="form-group">
+        <label for="fund_family" class="control-label">
+          Fund family
+        </label>
+
+        <textarea id="fund_family" name="fund_family" placeholder="Fund family" class="form-control" rows="3"><%= @fund.fund_family %></textarea>
+      </div>
+
+      <!-- Label and input for asset_class -->
+      <div class="form-group">
+        <label for="asset_class" class="control-label">
+          Asset class
+        </label>
+
+        <textarea id="asset_class" name="asset_class" placeholder="Asset class" class="form-control" rows="3"><%= @fund.asset_class %></textarea>
+      </div>
+
+      <!-- Label and input for fund_name -->
+      <div class="form-group">
+        <label for="fund_name" class="control-label">
+          Fund name
+        </label>
+
+        <textarea id="fund_name" name="fund_name" placeholder="Fund name" class="form-control" rows="3"><%= @fund.fund_name %></textarea>
+      </div>
+
+      <!-- Label for user_id -->
+
+      <div class="form-group">
+
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+      </div>
+
+      <button class="btn btn-success">
+        Create Fund
+      </button>
+      or
+      <a href="/funds">Cancel</a>
+    </form>
+  </div>
+</div>

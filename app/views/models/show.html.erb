@@ -1,0 +1,37 @@
+<div class="page-header">
+  <h3>Model #<%= @model.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Currencies</dt>
+      <dd><%= @model.currencies %></dd>
+
+      <dt>Commodities</dt>
+      <dd><%= @model.commodities %></dd>
+
+      <dt>Fixed income</dt>
+      <dd><%= @model.fixed_income %></dd>
+
+      <dt>Equity</dt>
+      <dd><%= @model.equity %></dd>
+
+      <dt>time period</dt>
+      <dd><%= @model.time_period %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/models" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/models/<%= @model.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_model/<%= @model.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

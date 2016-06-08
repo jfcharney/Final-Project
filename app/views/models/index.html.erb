@@ -1,0 +1,90 @@
+<div class="page-header">
+  <h1>
+
+    <a href="/funds/new" class="btn btn-lg btn-success">Add Fund</a>
+
+    <a href="/models/new" class="btn btn-lg btn-success">Add Model</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Fund name</th>
+        <th>Fund family</th>
+        <th>Asset class</th>
+        <th>Equity Model</th>
+        <th>Fixd Income Model</th>
+        <th>Currency Model</th>
+        <th>Commodities Model</th>
+        <th>Time Period</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @models.each do |model| %>
+      <tr>
+        <td><%= model.fund.fund_name %></td>
+        <td><%= model.fund.fund_family %></td>
+        <td><%= model.fund.asset_class %></td>
+        <td><%= model.equity %></td>
+        <td><%= model.fixed_income %></td>
+        <td><%= model.currencies %></td>
+        <td><%= model.commodities %></td>
+        <td><%= model.time_period %></td>
+
+        <td>
+          <a href="/models/<%= model.id %>" class="btn btn-primary">Show</a>
+          <a href="/models/<%= model.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_model/<%= model.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<%= search_form_for @q do |f| %>
+  <p class="lead">Filter Models:</p>
+
+  <div class="form-group">
+    <%= f.label :fund_fund_name_cont, "Title containing" %>
+    <%= f.text_field :fund_fund_name_cont, :class => "form-control", :placeholder => "Enter fund name" %>
+  </div>
+
+    <div class="form-group">
+      <%= f.label :fund_id_eq, "Select fund:" %>
+      <%= f.select :fund_id_eq, options_from_collection_for_select(Fund.all, :id, :fund_name,  @q.fund_id_eq), { :include_blank => true } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :fund_fund_family_eq, "Select Fund Family:" %>
+      <%= f.select :fund_fund_family_eq, options_from_collection_for_select(Fund.all, :fund_family, :fund_family,  @q.fund_fund_family_eq), { :include_blank => true } %>
+    </div>
+
+
+<div class="form-group">
+    <label>Select Time Period(s):</label>
+
+      <input type="checkbox" name="q[time_period_eq_any][]" id="q_time_period_eq_any_" value="3">
+      3
+    <label>
+    <label>
+      <input type="checkbox" name="q[time_period_eq_any][]" id="q_time_period_eq_any_" value="5">
+      5
+    <label>
+
+    <label>
+      <input type="checkbox" name="q[time_period_eq_any][]" id="q_time_period_eq_any_" value="10">
+      10
+    <label>
+  </label></label></label></label></label></label>
+
+</div>
+
+
+
+  <%= f.submit :class => "btn btn-primary btn-block" %>
+
+  <a href="/models" class="btn btn-default btn-block">Clear filters</a>
+<% end %>

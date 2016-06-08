@@ -1,0 +1,73 @@
+<!-- Validation failure messages -->
+<% if @model.errors.any? %>
+  <% @model.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Model #<%= @model.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_model/<%= @model.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for currencies -->
+      <div class="form-group">
+        <label for="currencies" class="control-label">
+          Currencies
+        </label>
+
+        <input type="text" id="currencies" name="currencies" placeholder="Currencies" class="form-control" value="<%= @model.currencies %>">
+      </div>
+
+      <!-- Label and input for commodities -->
+      <div class="form-group">
+        <label for="commodities" class="control-label">
+          Commodities
+        </label>
+
+        <input type="text" id="commodities" name="commodities" placeholder="Commodities" class="form-control" value="<%= @model.commodities %>">
+      </div>
+
+      <!-- Label and input for fixed_income -->
+      <div class="form-group">
+        <label for="fixed_income" class="control-label">
+          Fixed income
+        </label>
+
+        <input type="text" id="fixed_income" name="fixed_income" placeholder="Fixed income" class="form-control" value="<%= @model.fixed_income %>">
+      </div>
+
+      <!-- Label and input for equity -->
+      <div class="form-group">
+        <label for="equity" class="control-label">
+          Equity
+        </label>
+
+        <input type="text" id="equity" name="equity" placeholder="Equity" class="form-control" value="<%= @model.equity %>">
+      </div>
+
+      <!-- Label and input for time period -->
+      <div class="form-group">
+        <label for="time_period" class="control-label">
+          Time Period
+        </label>
+
+        <input type="text" id="time_period" name="time_period" placeholder="3, 5, or 10 years" class="form-control" value="<%= @model.time_period %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Model
+      </button>
+      or
+      <a href="/models/<%= @model.id %>">Cancel</a>
+    </form>
+  </div>
+</div>
